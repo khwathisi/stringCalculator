@@ -28,9 +28,13 @@ public class stringCalculator {
             try
             {
                 int parameterLength = Parameter.length();
-                String parameterChar1 = Character.toString(Parameter.charAt(0));
-                String parameterChar2 = Character.toString(Parameter.charAt(1));
-
+                String parameterChar1 = "";
+                String parameterChar2 = "";
+                if(parameterLength > 1)
+                {
+                    parameterChar1 = Character.toString(Parameter.charAt(0));
+                    parameterChar2 = Character.toString(Parameter.charAt(1));
+                }
                 if(parameterChar1.equals("/") && parameterChar2.equals("/"))
                 {
                     String backSlash;
@@ -45,7 +49,6 @@ public class stringCalculator {
                     } while (i <= parameterLength && !backSlash.equals("\\"));
                     delimits = stringBuilder.substring(0, stringBuilder.toString().length() - 1);
                 }
-
             }catch(Exception e)
             {
                 System.out.println("ERROR: processing single delimits failed");
@@ -73,6 +76,9 @@ public class stringCalculator {
                         }
 
                         delimits = stringBuilder1.substring(0, stringBuilder1.toString().length() - 1);
+                    }else if(!delimitsChar1.equals("[") && !delimitsLastChar.equals("]"))
+                    {
+                        delimits = "[" + delimits + "]";
                     }
                 }
             }catch(Exception e)
@@ -93,7 +99,6 @@ public class stringCalculator {
             //validating the numbers
             try
             {
-
                 for(int q = 0; q < values.length; q++)
                 {
                     Pattern neg = Pattern.compile ("[-]");
@@ -116,7 +121,7 @@ public class stringCalculator {
                             }
                         }
                     }catch(Exception e){
-                        System.out.println("ERROR: dealing with negatives, positives or maximum failed");
+                        System.out.println("ERROR: dealing with negatives, positives");
                     }
 
                 }
@@ -134,13 +139,16 @@ public class stringCalculator {
                     {
                         sum = sum + listNo.get(j);
                     }
-
                 }
 
                 stringSum = Integer.toString(sum);
                 String negNumber = negNumbers.toString();
                 negNumber = negNumber.substring(1, negNumber.length() - 1);
-                System.out.println("ERROR: negatives not allowed " + negNumber);
+                if(negNumbers.size() > 0)
+                {
+                    System.out.println("ERROR: negatives not allowed " + negNumber);
+                }
+
 
                 return "The sum is " + stringSum;
             }catch(Exception e)

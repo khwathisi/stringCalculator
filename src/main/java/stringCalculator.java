@@ -89,7 +89,7 @@ public class stringCalculator {
             //splitting the string with delimiters
             try
             {
-                delimits = delimits + "|\\D";
+                delimits = delimits + "|[$&+,:;=?@#|'\\]<>.\\[\\\\^*()%!a-zA-Z\\\\/]";
                 values = Parameter.split(delimits);
             }catch(Exception e)
             {
@@ -121,7 +121,7 @@ public class stringCalculator {
                             }
                         }
                     }catch(Exception e){
-                        System.out.println("ERROR: dealing with negatives, positives");
+                        System.out.println("ERROR: dealing with negatives and positives");
                     }
 
                 }
